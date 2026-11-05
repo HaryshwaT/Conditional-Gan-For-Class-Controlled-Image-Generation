@@ -85,6 +85,23 @@ Using the same noise vector for every class changes only the label, and the outp
 
 More figures are in this repo as PNG files: latent interpolation, within-class diversity, real vs generated samples and the EDA class-similarity plot.
 
+## Technical paper
+
+[Improving Class-Conditional GAN Generation with Auxiliary Classification: An Empirical Study of Hard CIFAR-10 Classes](ACGAN_paper.pdf) (PDF, 10 pages, individual work)
+
+A follow-up study of whether adding an auxiliary classification objective (ACGAN) improves class conditioning for the visually overlapping classes (cat, dog, bird, horse). A baseline conditional DCGAN and an ACGAN were trained under matched conditions: 80 epochs, the same generator and the same hyperparameters.
+
+| Model | Class-conditioning accuracy | FID | KID |
+|---|---|---|---|
+| Baseline cDCGAN | 63.15% | 258.91 | 0.0868 |
+| ACGAN | 71.70% | 267.15 | 0.0948 |
+| ACGAN + EMA continuation | **76.25%** | **248.78** | **0.0799** |
+
+- ACGAN raised class-conditioning accuracy by 8.55 percentage points but slightly worsened FID and KID.
+- The effect on hard classes was uneven: dog FID improved (885.76 to 784.96) while bird (466.49 to 529.27) and cat (427.79 to 481.84) got worse. This matches the diversity/fidelity trade-off reported in the ACGAN literature.
+- The EMA continuation scored best on every tracked metric, but it also added 20 fine-tuning epochs at a lower learning rate, so the gain cannot be credited to EMA alone.
+- Each model was trained once, so the results support the trade-off rather than prove it. The paper lists multi-seed runs and longer training as future work.
+
 ## Try it
 
 The final model's EMA generator weights (about 21 MB) are included here as `ema_generator.weights.h5`. To generate images of any class:
@@ -109,6 +126,7 @@ Output of `python generate.py` with the included weights (one row per class, in 
 
 - `cifar10_conditional_gan.ipynb`: full notebook (EDA, baseline, all experiments, evaluation). Image outputs are stripped to keep it light; the key figures are saved as PNG files in this repo.
 - `generate.py`: loads the weights and generates images for any class.
+- `ACGAN_paper.pdf`: the technical paper.
 - `ema_generator.weights.h5`: the final model's EMA generator weights.
 - `*.png`: selected result figures.
 - `requirements.txt`: Python packages.
