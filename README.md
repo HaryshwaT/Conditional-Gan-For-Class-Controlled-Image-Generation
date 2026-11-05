@@ -17,7 +17,7 @@ An individual deep learning project. I trained a conditional DCGAN that generate
 
 The EMA improvement was reproduced in 5 of 5 independent training sessions. Random chance for class-conditioning accuracy is 10%.
 
-![Baseline vs final model samples](figures/01_baseline_vs_final_samples.png)
+![Baseline vs final model samples](01_baseline_vs_final_samples.png)
 
 *Each row is one class. Left: baseline. Right: final model.*
 
@@ -75,19 +75,19 @@ The hardest classes improved the most.
 | airplane | 230.80 | 224.41 | 2.8% lower |
 | ship | 214.10 | 217.00 | 1.4% higher |
 
-![Per-class FID](figures/02_per_class_fid_baseline_vs_final.png)
+![Per-class FID](02_per_class_fid_baseline_vs_final.png)
 
 ## Does conditioning work, and is the model diverse?
 
 Using the same noise vector for every class changes only the label, and the output changes to match:
 
-![Same noise, every class](figures/05_same_noise_all_classes.png)
+![Same noise, every class](05_same_noise_all_classes.png)
 
-More figures are in [`figures/`](figures/): latent interpolation, within-class diversity, real vs generated samples and the EDA class-similarity plot.
+More figures are in this repo as PNG files: latent interpolation, within-class diversity, real vs generated samples and the EDA class-similarity plot.
 
 ## Try it
 
-The final model's EMA generator weights (about 21 MB) are included in `weights/`. To generate images of any class:
+The final model's EMA generator weights (about 21 MB) are included here as `ema_generator.weights.h5`. To generate images of any class:
 
 ```bash
 pip install -r requirements.txt
@@ -97,7 +97,7 @@ python generate.py --cls dog --n 16   # 16 dogs
 
 Output of `python generate.py` with the included weights (one row per class, in CIFAR-10 order):
 
-![Generated samples for all classes](figures/09_generated_samples_all_classes.png)
+![Generated samples for all classes](09_generated_samples_all_classes.png)
 
 ## Limitations
 
@@ -107,10 +107,10 @@ Output of `python generate.py` with the included weights (one row per class, in 
 
 ## Files
 
-- `cifar10_conditional_gan.ipynb`: full notebook (EDA, baseline, all experiments, evaluation). Image outputs are stripped to keep it light; the key figures are in `figures/`.
+- `cifar10_conditional_gan.ipynb`: full notebook (EDA, baseline, all experiments, evaluation). Image outputs are stripped to keep it light; the key figures are saved as PNG files in this repo.
 - `generate.py`: loads the weights and generates images for any class.
-- `weights/`: the final model's EMA generator weights.
-- `figures/`: selected result figures.
+- `ema_generator.weights.h5`: the final model's EMA generator weights.
+- `*.png`: selected result figures.
 - `requirements.txt`: Python packages.
 
 ## Re-running the experiments

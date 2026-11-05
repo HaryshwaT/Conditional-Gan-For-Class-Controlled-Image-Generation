@@ -57,7 +57,7 @@ def build_generator(latent_dim=LATENT_DIM, num_classes=10):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--weights", default="weights/ema_generator.weights.h5", help="path to the EMA generator weights")
+    p.add_argument("--weights", default="ema_generator.weights.h5", help="path to the EMA generator weights")
     p.add_argument("--cls", default="all", help="class name (e.g. dog) or 'all'")
     p.add_argument("--n", type=int, default=10, help="images per class")
     p.add_argument("--seed", type=int, default=0)
