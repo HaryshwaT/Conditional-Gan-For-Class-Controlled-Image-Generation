@@ -1,0 +1,7 @@
+# Ignore other weight files; keep the final model's EMA generator
+*.h5
+!weights/ema_generator.weights.h5
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+data/
